@@ -16,9 +16,9 @@
     best subscriptions is:
   </p>
   <div class="card">
-    <h4>
-      {best.name} (monthly price: {(best.yearlyPrice / 12).toFixed(2)} CHF)
-    </h4>
+    <p class="the-best">
+      {best.name}<br />(monthly price: {(best.yearlyPrice / 12).toFixed()} CHF)
+    </p>
   </div>
 {/if}
 
@@ -28,14 +28,14 @@
     <thead>
       <tr>
         <th>Subscription</th>
-        <th>Renewals</th>
+        <th>Renewals for year</th>
         <th>Yearly Price</th>
         <th>Monthly Price</th>
       </tr>
     </thead>
     <tbody>
       {#each subscriptions as { name, yearlyPrice, expectedYearlyRenewals }}
-        <tr>
+        <tr class:best-row={name === best?.name}>
           <td>{name}</td>
           <td>{expectedYearlyRenewals.toFixed(2)}</td>
           <td>{yearlyPrice.toFixed()} CHF</td>
@@ -51,12 +51,31 @@
     margin-left: auto;
     margin-right: auto;
     border-collapse: collapse;
-    border: 2px solid white;
+    border: 2px solid #818181;
   }
   th,
   td {
-    border: 1px solid white;
+    border: 1px solid #818181;
     padding: 8px;
     text-align: center;
+  }
+
+  .the-best {
+    font-weight: bold;
+    font-size: larger;
+    color: #40c428;
+  }
+
+  .best-row {
+    color: #40c428;
+    font-weight: bold;
+  }
+
+  .best-row td:first-child::before {
+    content: "🏆 ";
+  }
+
+  .best-row td:first-child::after {
+    content: " 🌟";
   }
 </style>
