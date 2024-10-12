@@ -2,6 +2,7 @@ export type Subscription = {
   name: string;
   yearlyPrice: number;
   expectedYearlyRenewals: number;
+  hint?: string;
 };
 
 type HalfFarePlus = {
@@ -35,9 +36,12 @@ const sbbGa: Subscription[] = [
     expectedYearlyRenewals: 1,
   },
   {
-    name: "SBB GA Duo (half of two GAs with Duo)",
+    name: "SBB GA Duo",
     yearlyPrice: (3995 + 2860) / 2,
     expectedYearlyRenewals: 1,
+    hint:
+      "If you're living with your partner, you're eligible for the GA Duo. Here we consider the price of a normal " +
+      "GA and a GA Duo divided by two. It isn't sure though that it'd be worth for your partner too.",
   },
 ];
 
