@@ -1,6 +1,6 @@
 <script lang="ts">
   import ResultDisplay from "./ResultDisplay.svelte";
-  import {onMount} from "svelte";
+  import { onMount } from "svelte";
 
   let creditUsed: number = 0;
   let remainingDays: number = 0;
@@ -12,10 +12,13 @@
     const data = JSON.parse(raw);
     creditUsed = data.creditUsed || 0;
     remainingDays = data.remainingDays || 0;
-  })
+  });
 
   $: if (creditUsed || remainingDays) {
-    localStorage.setItem(localStorageKey, JSON.stringify({creditUsed, remainingDays}));
+    localStorage.setItem(
+      localStorageKey,
+      JSON.stringify({ creditUsed, remainingDays }),
+    );
   }
 
   function handleSubmit(event: Event) {

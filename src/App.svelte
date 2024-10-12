@@ -8,7 +8,6 @@
   <div class="card">
     <CreditForm />
   </div>
-
 </main>
 
 <style>
