@@ -31,7 +31,9 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    permissions:
+        contents: write
+    #    if: github.ref == 'refs/heads/main'
 
     steps:
       - name: Checkout repository
@@ -52,4 +54,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: build
+          publish_dir: dist
