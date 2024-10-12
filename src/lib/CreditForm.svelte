@@ -62,10 +62,4 @@
     padding: 0.5rem;
     font-size: 1rem;
   }
-
-  button {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-  }
 </style>
