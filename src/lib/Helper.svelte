@@ -3,7 +3,7 @@
   import { faCircleInfo } from "@fortawesome/free-solid-svg-icons/faCircleInfo";
   import { createPopperActions } from "svelte-popperjs";
 
-  export let text: boolean;
+  export let text: string;
 
   const [popperRef, popperContent] = createPopperActions({
     placement: "bottom",
