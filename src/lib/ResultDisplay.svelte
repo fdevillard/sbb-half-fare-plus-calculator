@@ -1,5 +1,6 @@
 <script lang="ts">
   import { subscriptionsFromYearlyExpenses } from "./compute";
+  import Helper from "./Helper.svelte";
 
   export let yearlyPrice: number;
 
@@ -7,6 +8,11 @@
   $: best = subscriptions.reduce((lowest, item) =>
     item.yearlyPrice < lowest.yearlyPrice ? item : lowest,
   );
+
+  const renewalHelp =
+    "The number of time the subscription should be done per year. " +
+    "It's a number greater or equal to 1. It can be fractional if you should " +
+    "contract another subscription within the year.";
 </script>
 
 {#if best}
@@ -28,15 +34,18 @@
     <thead>
       <tr>
         <th>Subscription</th>
-        <th>Renewals for year</th>
+        <th>Renewals per year <Helper text={renewalHelp} /></th>
         <th>Yearly Price</th>
         <th>Monthly Price</th>
       </tr>
     </thead>
     <tbody>
-      {#each subscriptions as { name, yearlyPrice, expectedYearlyRenewals }}
+      {#each subscriptions as { name, yearlyPrice, expectedYearlyRenewals, hint }}
         <tr class:best-row={name === best?.name}>
-          <td>{name}</td>
+          <td
+            >{name}{#if hint}
+              <Helper text={hint} />{/if}</td
+          >
           <td>{expectedYearlyRenewals.toFixed(2)}</td>
           <td>{yearlyPrice.toFixed()} CHF</td>
           <td>{(yearlyPrice / 12).toFixed()} CHF</td>
