@@ -28,7 +28,7 @@
     <thead>
       <tr>
         <th>Subscription</th>
-        <th>Renewals</th>
+        <th>Renewals for year</th>
         <th>Yearly Price</th>
         <th>Monthly Price</th>
       </tr>
