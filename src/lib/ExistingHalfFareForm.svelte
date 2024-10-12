@@ -5,7 +5,7 @@
   let creditUsed: number = 0;
   let remainingDays: number = 0;
 
-  const localStorageKey = "sbb-half-fare-plus";
+  const localStorageKey = "existingHalfFareForm";
 
   onMount(() => {
     const raw = localStorage.getItem(localStorageKey) || "{}";
@@ -21,15 +21,14 @@
     );
   }
 
-  function handleSubmit(event: Event) {
-    event.preventDefault();
-    console.log(`Credit Used: ${creditUsed}, Remaining Days: ${remainingDays}`);
-  }
+  $: passedDays = 365 - remainingDays;
+  $: pricePerDay = creditUsed / passedDays;
+  $: yearlyPrice = pricePerDay * 365;
 </script>
 
 <main>
   <h2>Enter Credit Details</h2>
-  <form on:submit={handleSubmit}>
+  <form>
     <div>
       <label for="creditUsed">Credit Used (CHF):</label>
       <input type="number" id="creditUsed" bind:value={creditUsed} />
@@ -38,12 +37,14 @@
       <label for="remainingDays">Remaining Days:</label>
       <input type="number" id="remainingDays" bind:value={remainingDays} />
     </div>
-    <p>You can find these values in your SBB Half Far plus.</p>
+    <p>You can find these values in your SBB Application.</p>
   </form>
 
-  <div class="card">
-    <ResultDisplay {creditUsed} {remainingDays} />
-  </div>
+  {#if yearlyPrice}
+    <div class="card">
+      <ResultDisplay {yearlyPrice} />
+    </div>
+  {/if}
 </main>
 
 <style>
