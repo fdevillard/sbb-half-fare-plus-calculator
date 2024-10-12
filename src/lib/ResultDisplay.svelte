@@ -12,32 +12,37 @@
     $: best = subscriptions.reduce((lowest, item) => item.yearlyPrice < lowest.yearlyPrice ? item : lowest)
 </script>
 
-<h3>Results</h3>
-<p>Based on your expected yearly credit usage of {yearlyPrice.toFixed(2)} CHF, the best subscriptions is:</p>
-<div class="card">
-    <h4>{best.name} (monthly price: {(best.yearlyPrice / 12).toFixed(2)} CHF)</h4>
-</div>
-<h5>Details:</h5>
-<table>
-    <thead>
-        <tr>
-            <th>Subscription</th>
-            <th>Renewals</th>
-            <th>Yearly Price</th>
-            <th>Monthly Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        {#each subscriptions as {name, yearlyPrice, expectedYearlyRenewals}}
+{#if best}
+    <h3>Results</h3>
+    <p>Based on your expected yearly credit usage of {yearlyPrice.toFixed(2)} CHF, the best subscriptions is:</p>
+    <div class="card">
+        <h4>{best.name} (monthly price: {(best.yearlyPrice / 12).toFixed(2)} CHF)</h4>
+    </div>
+{/if}
+
+{#if subscriptions}
+    <h3>Details:</h3>
+    <table>
+        <thead>
             <tr>
-                <td>{name}</td>
-                <td>{expectedYearlyRenewals.toFixed(2)}</td>
-                <td>{yearlyPrice.toFixed()} CHF</td>
-                <td>{(yearlyPrice / 12).toFixed()} CHF</td>
+                <th>Subscription</th>
+                <th>Renewals</th>
+                <th>Yearly Price</th>
+                <th>Monthly Price</th>
             </tr>
-        {/each}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {#each subscriptions as {name, yearlyPrice, expectedYearlyRenewals}}
+                <tr>
+                    <td>{name}</td>
+                    <td>{expectedYearlyRenewals.toFixed(2)}</td>
+                    <td>{yearlyPrice.toFixed()} CHF</td>
+                    <td>{(yearlyPrice / 12).toFixed()} CHF</td>
+                </tr>
+            {/each}
+        </tbody>
+    </table>
+{/if}
 
 <style>
     table {

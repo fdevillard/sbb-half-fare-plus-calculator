@@ -7,7 +7,7 @@ export type Subscription = {
 type HalfFarePlus = {
     name: string;
     price: number;
-    credit?: number;
+    credit: number;
 }
 
 const halfFarePlus: HalfFarePlus[] = [
