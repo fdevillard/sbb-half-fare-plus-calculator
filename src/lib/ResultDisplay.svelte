@@ -1,12 +1,7 @@
 <script lang="ts">
   import { subscriptionsFromYearlyExpenses } from "./compute";
 
-  export let creditUsed: number;
-  export let remainingDays: number;
-
-  $: passedDays = 365 - remainingDays;
-  $: pricePerDay = creditUsed / passedDays;
-  $: yearlyPrice = pricePerDay * 365;
+  export let yearlyPrice: number;
 
   $: subscriptions = subscriptionsFromYearlyExpenses(yearlyPrice);
   $: best = subscriptions.reduce((lowest, item) =>
