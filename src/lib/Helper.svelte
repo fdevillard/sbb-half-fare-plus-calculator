@@ -2,6 +2,7 @@
   import Fa from "svelte-fa";
   import { faCircleInfo } from "@fortawesome/free-solid-svg-icons/faCircleInfo";
   import { createPopperActions } from "svelte-popperjs";
+  import { onMount } from "svelte";
 
   export let text: string;
 
@@ -17,18 +18,37 @@
   const closeIt = () => {
     isOpen = false;
   };
+
+  let popperContentElement: HTMLElement | undefined = undefined;
+
+  function closeIfClickOutside(event: MouseEvent) {
+    if (!isOpen) return;
+    if (
+      popperContentElement &&
+      !popperContentElement.contains(event.target as Node)
+    ) {
+      closeIt();
+    }
+  }
+
+  onMount(() => {
+    document.addEventListener("click", closeIfClickOutside);
+    return () => {
+      document.removeEventListener("click", closeIfClickOutside);
+    };
+  });
 </script>
 
 <button
   use:popperRef
   on:mouseenter={openIt}
   on:mouseleave={closeIt}
-  on:click={openIt}
+  on:click|stopPropagation={openIt}
 >
   <Fa icon={faCircleInfo} /></button
 >
 {#if isOpen}
-  <div use:popperContent class="popper">
+  <div use:popperContent class="popper" bind:this={popperContentElement}>
     <span>{text}</span>
   </div>
 {/if}
