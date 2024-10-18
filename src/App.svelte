@@ -9,7 +9,7 @@
       This tool helps you to find the best Half Fare Plus subscription based on
       the consumption of your current one.
     </p>
-    <p>At the moment, the app assumes you already have one.</p>
+    <p>If you don't already have one, enter your yearly estimate and set 0 remaining days.</p>
   </div>
 </header>
 
