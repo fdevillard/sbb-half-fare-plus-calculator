@@ -1,16 +1,22 @@
 <script lang="ts">
+  import { stopPropagation } from "svelte/legacy";
+
   import Fa from "svelte-fa";
   import { faCircleInfo } from "@fortawesome/free-solid-svg-icons/faCircleInfo";
   import { createPopperActions } from "svelte-popperjs";
   import { onMount } from "svelte";
 
-  export let text: string;
+  interface Props {
+    text: string;
+  }
+
+  let { text }: Props = $props();
 
   const [popperRef, popperContent] = createPopperActions({
     placement: "bottom",
     strategy: "fixed",
   });
-  let isOpen: boolean = false;
+  let isOpen: boolean = $state(false);
 
   const openIt = () => {
     isOpen = true;
@@ -19,7 +25,7 @@
     isOpen = false;
   };
 
-  let popperContentElement: HTMLElement | undefined = undefined;
+  let popperContentElement: HTMLElement | undefined = $state(undefined);
 
   function closeIfClickOutside(event: MouseEvent) {
     if (!isOpen) return;
@@ -41,9 +47,9 @@
 
 <button
   use:popperRef
-  on:mouseenter={openIt}
-  on:mouseleave={closeIt}
-  on:click|stopPropagation={openIt}
+  onmouseenter={openIt}
+  onmouseleave={closeIt}
+  onclick={stopPropagation(openIt)}
 >
   <Fa icon={faCircleInfo} /></button
 >
