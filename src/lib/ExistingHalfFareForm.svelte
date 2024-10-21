@@ -1,9 +1,11 @@
 <script lang="ts">
+  import { run } from "svelte/legacy";
+
   import ResultDisplay from "./ResultDisplay.svelte";
   import { onMount } from "svelte";
 
-  let creditUsed: number = 0;
-  let remainingDays: number = 0;
+  let creditUsed: number = $state(0);
+  let remainingDays: number = $state(0);
 
   const localStorageKey = "existingHalfFareForm";
 
@@ -14,16 +16,18 @@
     remainingDays = data.remainingDays || 0;
   });
 
-  $: if (creditUsed || remainingDays) {
-    localStorage.setItem(
-      localStorageKey,
-      JSON.stringify({ creditUsed, remainingDays }),
-    );
-  }
+  run(() => {
+    if (creditUsed || remainingDays) {
+      localStorage.setItem(
+        localStorageKey,
+        JSON.stringify({ creditUsed, remainingDays }),
+      );
+    }
+  });
 
-  $: passedDays = 365 - remainingDays;
-  $: pricePerDay = creditUsed / passedDays;
-  $: yearlyPrice = pricePerDay * 365;
+  let passedDays = $derived(365 - remainingDays);
+  let pricePerDay = $derived(creditUsed / passedDays);
+  let yearlyPrice = $derived(pricePerDay * 365);
 </script>
 
 <main>

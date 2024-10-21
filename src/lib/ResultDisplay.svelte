@@ -2,11 +2,17 @@
   import { subscriptionsFromYearlyExpenses } from "./compute";
   import Helper from "./Helper.svelte";
 
-  export let yearlyPrice: number;
+  interface Props {
+    yearlyPrice: number;
+  }
 
-  $: subscriptions = subscriptionsFromYearlyExpenses(yearlyPrice);
-  $: best = subscriptions.reduce((lowest, item) =>
-    item.yearlyPrice < lowest.yearlyPrice ? item : lowest,
+  let { yearlyPrice }: Props = $props();
+
+  let subscriptions = $derived(subscriptionsFromYearlyExpenses(yearlyPrice));
+  let best = $derived(
+    subscriptions.reduce((lowest, item) =>
+      item.yearlyPrice < lowest.yearlyPrice ? item : lowest,
+    ),
   );
 
   const renewalHelp =
