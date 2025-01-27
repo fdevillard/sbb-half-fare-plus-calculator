@@ -9,7 +9,10 @@
       This tool helps you to find the best Half Fare Plus subscription based on
       the consumption of your current one.
     </p>
-    <p>If you don't already have one, enter your yearly estimate and set 0 remaining days.</p>
+    <p>
+      If you don't already have one, enter your yearly estimate and set 0
+      remaining days.
+    </p>
   </div>
 </header>
 
@@ -18,6 +21,14 @@
     <ExistingHalfFareForm />
   </div>
 </main>
+
+<footer>
+  <p>
+    <strong>Disclaimer</strong>: This tool is a personal project and may not
+    always provide accurate or complete calculations. Please use it at your own
+    discretion and risk.
+  </p>
+</footer>
 
 <style>
 </style>
