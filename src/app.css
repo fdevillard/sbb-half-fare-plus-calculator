@@ -1,79 +1,209 @@
+/* ─── Design Tokens ──────────────────────────────────── */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* Brand */
+  --color-accent: #c8102e;
+  --color-accent-hover: #a50d25;
+  --color-accent-subtle: rgba(200, 16, 46, 0.12);
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Surfaces — dark defaults */
+  --color-bg: #161618;
+  --color-surface: #1f1f23;
+  --color-surface-raised: #29292f;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-strong: rgba(255, 255, 255, 0.2);
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  /* Text — dark defaults */
+  --color-text-primary: #f0f0f2;
+  --color-text-secondary: #a0a0ab;
+  --color-text-disabled: #606068;
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+  /* Semantic */
+  --color-success: #2d9e5f;
+  --color-success-bg: rgba(45, 158, 95, 0.14);
+  --color-success-text: #5fcc8f;
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
+  /* Spacing scale (8-pt grid) */
+  --space-1: 0.25rem; /*  4px */
+  --space-2: 0.5rem; /*  8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-8: 2rem; /* 32px */
+  --space-10: 2.5rem; /* 40px */
+  --space-12: 3rem; /* 48px */
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
 
-.card {
-  padding: 2em;
-}
+  /* Elevation / shadow */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.55), 0 4px 8px rgba(0, 0, 0, 0.3);
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+  /* Typography */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, "JetBrains Mono", monospace;
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+
+  /* Z-index */
+  --z-tooltip: 9000;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --color-bg: #f5f5f7;
+    --color-surface: #ffffff;
+    --color-surface-raised: #f0f0f4;
+    --color-border: rgba(0, 0, 0, 0.09);
+    --color-border-strong: rgba(0, 0, 0, 0.18);
+
+    --color-text-primary: #1a1a1e;
+    --color-text-secondary: #5a5a68;
+    --color-text-disabled: #a0a0ab;
+
+    --color-success: #1d7d48;
+    --color-success-bg: rgba(29, 125, 72, 0.1);
+    --color-success-text: #1d7d48;
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
   }
-  a:hover {
-    color: #747bff;
+}
+
+/* ─── Base reset ─────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ─── Fluid type scale ───────────────────────────────── */
+h1 {
+  font-size: clamp(1.5rem, 4vw + 0.5rem, 2.5rem);
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+h2 {
+  font-size: clamp(1.1rem, 2.5vw + 0.4rem, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--space-6);
+}
+
+h3 {
+  font-size: clamp(0.95rem, 1.5vw + 0.4rem, 1.125rem);
+  font-weight: 600;
+  margin: 0 0 var(--space-4);
+}
+
+/* ─── App shell ──────────────────────────────────────── */
+#app {
+  width: 100%;
+  max-width: 720px;
+  padding: var(--space-6) var(--space-4);
+  text-align: left;
+}
+
+/* ─── Card primitive ─────────────────────────────────── */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-8) var(--space-6);
+}
+
+/* ─── Links ──────────────────────────────────────────── */
+a {
+  font-weight: 500;
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+a:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
+
+/* ─── Buttons (base) ─────────────────────────────────── */
+button {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1;
+  padding: var(--space-3) var(--space-5);
+  min-height: 44px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface-raised);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+button:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent-subtle);
+}
+button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ─── Breakpoints ────────────────────────────────────── */
+@media (max-width: 480px) {
+  #app {
+    padding: var(--space-4) var(--space-3);
   }
-  button {
-    background-color: #f9f9f9;
+
+  .card {
+    padding: var(--space-5) var(--space-4);
+    border-radius: var(--radius-md);
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
