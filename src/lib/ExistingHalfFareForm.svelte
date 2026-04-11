@@ -30,44 +30,83 @@
   let yearlyPrice = $derived(pricePerDay * 365);
 </script>
 
-<main>
+<section>
   <h2>Enter Credit Details</h2>
   <form>
-    <div>
-      <label for="creditUsed">Credit Used (CHF):</label>
-      <input type="number" id="creditUsed" bind:value={creditUsed} />
+    <div class="form-group">
+      <label for="creditUsed">Credit Used (CHF)</label>
+      <input
+        type="number"
+        id="creditUsed"
+        bind:value={creditUsed}
+        placeholder="e.g. 500"
+      />
     </div>
-    <div>
-      <label for="remainingDays">Remaining Days:</label>
-      <input type="number" id="remainingDays" bind:value={remainingDays} />
+    <div class="form-group">
+      <label for="remainingDays">Remaining Days</label>
+      <input
+        type="number"
+        id="remainingDays"
+        bind:value={remainingDays}
+        placeholder="e.g. 180"
+      />
     </div>
-    <p>You can find these values in your SBB Application.</p>
+    <p class="hint">You can find these values in your SBB application.</p>
   </form>
 
   {#if yearlyPrice}
-    <div class="card">
-      <ResultDisplay {yearlyPrice} />
-    </div>
+    <ResultDisplay {yearlyPrice} />
   {/if}
-</main>
+</section>
 
 <style>
+  h2 {
+    font-size: 1.25rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-lg);
+    font-weight: 600;
+  }
+
   form {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: var(--space-lg);
   }
 
-  div {
-    margin-bottom: 1rem;
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    text-align: left;
   }
 
   label {
-    margin-right: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
   }
 
-  input {
-    padding: 0.5rem;
-    font-size: 1rem;
+  input[type="number"] {
+    width: 100%;
+  }
+
+  .hint {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  @media (min-width: 640px) {
+    .form-group {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    label {
+      min-width: 160px;
+      text-align: right;
+      flex-shrink: 0;
+    }
   }
 </style>

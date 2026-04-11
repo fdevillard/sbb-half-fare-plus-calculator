@@ -71,16 +71,13 @@
   }
 
   .popper {
-    background-color: black;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 30em;
-  }
-
-  @media (prefers-color-scheme: light) {
-    .popper {
-      background-color: white;
-    }
+    background-color: var(--color-tooltip-bg);
+    padding: var(--space-md);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+    max-width: min(30em, calc(100vw - 2rem));
+    z-index: 100;
+    color: var(--color-text-primary);
   }
 </style>
